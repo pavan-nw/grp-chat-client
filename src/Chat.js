@@ -16,7 +16,7 @@ class Chat extends React.Component {
             joinBtnStyle: {display:'block'},
         };
 
-        this.socket = io(window.location.hostname + ':5001');
+        this.socket = io(window.location.hostname);
 
         const generateColor = (author) => {
             if (!this.state.colors[author]) {
