@@ -11,7 +11,8 @@
     "react-scripts": "1.0.15"
   },
   "scripts": {
-    "start": "cd ./backend && npm install && node ./backend/app.js",
+    "start": "cd ./backend && npm install && node ./app.js",
+    "heroku-postbuild": "npm run build",
     "start-client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
