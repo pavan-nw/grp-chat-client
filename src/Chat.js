@@ -37,6 +37,8 @@ class Chat extends React.Component {
                 data['style'] = {
                     color: this.state.colors[data.author],
                     padding: 10,
+                    fontWeight: 'bold',
+                    fontSize: '18px'
                 }
                 this.setState({ messages: [...this.state.messages, data] });
                 console.log(this.state.messages);
@@ -55,6 +57,8 @@ class Chat extends React.Component {
                 color: this.state.colors[this.state.username],
                 padding: 10,
                 textAlign: 'right',
+                fontWeight: 'bold',
+                fontSize: '18px'
             }
             this.setState({ messages: [...this.state.messages, sendingMsg] });
             this.setState({message: ''});
@@ -64,21 +68,33 @@ class Chat extends React.Component {
         this.joinChat = ev => {
             this.setState({chatBoxStyle: {display:'block'}, joinBtnStyle: {display:'none'}});
         }
+
+        this.onEnter = ev => {
+            ev.preventDefault();
+            // Number 13 is the "Enter" key on the keyboard
+            if (ev.keyCode === 13) {
+                // Trigger the button element with a click
+               this.sendMessage(ev);
+            }
+        }
     }
     render() {
         return (
-            <div className="container">
+            <div className="container" >
                 <div className="row">
                     <div className="col-12">
-                        <div className="card">
+                        <div className="card" >
                             <div className="card-body">
-                                <div className="card-title">Group Chat Client</div>
+                                <div className="card-title"><h2>Group Chat Client</h2></div>
                                 <hr />
-                                <div className="messages" style={{minHeight: '250px'}}>
+                                <div className="messages" style={{minHeight: '350px'}}>
                                     {this.state.messages.map(message => {
                                         return (
-                                            <div className="card" style={{
+                                            <div style={{
                                                 marginBottom: 10,
+                                                border: 'solid 3px',
+                                                borderColor: '#0000ff4a',
+                                                borderRadius: 8
                                             }}>
                                                 <div style={message.style}>{message.author}: {message.message}
                                                  
@@ -95,7 +111,7 @@ class Chat extends React.Component {
                                 <button style={this.state.joinBtnStyle} onClick={this.joinChat} className="btn btn-primary form-control">Join Chat</button>
                                 <br />
                                 <div style={this.state.chatBoxStyle}>
-                                <textarea type="text" placeholder="Message" rows="5" className="form-control" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} />
+                                <textarea type="text" onKeyUp={this.onEnter} placeholder="Message" rows="5" className="form-control" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} />
                                 <br />
                                 <button onClick={this.sendMessage} className="btn btn-primary pull-right">Send</button>
                                 </div>
