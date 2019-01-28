@@ -68,8 +68,8 @@ class Chat extends React.Component {
         chatBoxStyle: { display: "block" },
         joinBtnStyle: { display: "none" }
       });
-      this.socket = io(window.location.hostname);
-    //   this.socket = io(window.location.hostname + ":8090");
+      // this.socket = io(window.location.hostname);
+      this.socket = io(window.location.hostname + ":8090");
       this.socket.on("RECEIVE_MESSAGE", function(data) {
         addMessage(data);
       });
